@@ -9,13 +9,16 @@ The fictional retailer and policies are original synthetic data, not Flipkart po
 
 ## Current evidence status
 
-- Core metrics, quality evaluation, cache isolation, CLI and fixture reports have been tested locally.
-- The development machine reports an Apple M5, 10 GPU cores, 16 GB unified memory.
-- **Actual MLX inference has not run in this session.** Package-registry access was unavailable,
-  MLX/model weights were not installed, and native integration remains unverified.
-- Demo numbers are explicitly simulated, identical across variants, and unusable as performance claims.
-- No production deployment, cloud rental, measured speedup, or dollar savings is claimed.
-- Nothing has been pushed to GitHub. Owner confirmation is required before any push.
+A local Apple M5 run (10 GPU cores, 16 GB unified memory) completed all four variants
+across three rounds. Combined quantization and warm-prefix reuse reduced median TTFT
+from 768.0 to 71.5 ms and increased serial output throughput from 27.48 to 84.98 tokens/s.
+**All quality gates failed:** FP16 accuracy was 14/52 (26.9%) and INT4 accuracy was
+15/52 (28.8%). These are performance observations, not a recommendation to deploy.
+
+See [the measured results and failure analysis](docs/RESULTS.md). The public
+`results/example-fixture` directory contains **simulated test data**, not those measurements.
+Local raw results are excluded from Git by default. No production deployment or monetary
+savings are established. NVIDIA serving remains an unexecuted extension.
 
 ## Why these two projects
 
@@ -60,13 +63,16 @@ python -m inference_lab matrix --models models/qwen --out results/local --rounds
 open results/local/report.html
 ```
 
+Preparation requires a new or empty model directory. After it succeeds, skip `prepare`
+on subsequent benchmark runs and reuse the prepared models.
+
 The download plus original/converted models needs several GB of disk. Conversion and
 benchmarking use the GPU and unified memory; close other heavy applications. Start with
 the 1.5B model on a 16 GB machine. Do not assume a larger model will fit without swapping.
 Do not upload model weights or the Hugging Face cache to GitHub.
 
-The MLX package version is pinned to 0.32.2. Native APIs were checked against upstream
-documentation/source, but need execution validation on the installed runtime. The manifest
+The MLX-LM package version is pinned to 0.32.2 (MLX itself is a separate dependency). Native APIs were checked against upstream
+documentation/source, and a local run is documented in the validation record; other environments still need a smoke run. The manifest
 records the resolved model SHA and file hashes; the environment lock records all dependencies.
 If an MLX API incompatibility appears, retain the error and dependency lock rather than
 silently switching versions and combining results.
@@ -138,10 +144,18 @@ cash savings if resources are reduced, autoscaled or used for additional valuabl
 - `*-round-*.json`: raw measured requests, quality outputs and provenance.
 - `comparison.json`: aggregated metrics, quality gates, cache equivalence and paired TTFT intervals.
 - `report.md` / `report.html`: offline reviewable evidence.
-- `interview_draft.txt`: an evidence-status-aware starting point; no fabricated accomplishments.
+- `evidence_summary.txt`: a neutral summary of evidence status and quality-gate outcomes.
 
 See [IMPLEMENTATION_REVIEW.md](docs/IMPLEMENTATION_REVIEW.md) for the code tour,
-[INTERVIEW_GUIDE.md](docs/INTERVIEW_GUIDE.md) for the application answer,
+[RESULTS.md](docs/RESULTS.md) for measured findings,
 and [SOURCES.md](docs/SOURCES.md) for the book-to-code mapping.
 
 No script commits, pushes, publishes, rents a GPU or creates cloud resources.
+
+## Contributing and scope
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for offline checks and evidence requirements,
+and [docs/REPOSITORY_REVIEW.md](docs/REPOSITORY_REVIEW.md) for remaining work.
+The project is an experimental benchmark, not a return-decision service.
+A source-code license has not yet been selected; model weights and dependencies retain
+their own licenses. Public visibility alone does not grant an open-source license.

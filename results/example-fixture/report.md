@@ -30,6 +30,36 @@ Confidence intervals resample case means, not individual tokens. Small synthetic
 - int4: after − before = 0.000 ms; case-bootstrap 95% CI [0.000, 0.000] ms.
 - int4-prefix: after − before = 0.000 ms; case-bootstrap 95% CI [0.000, 0.000] ms.
 
+## Quality diagnostics
+
+Accuracy requires the exact expected decision and a valid schema. Valid JSON alone is insufficient.
+No regressions means no previously correct cases became wrong; it does not mean the baseline is useful.
+
+| Variant | Correct / total | Valid schema | Boundary | Missing | Invalid | Injection |
+|---|---:|---:|---:|---:|---:|---:|
+| fp16 | 52 / 52 | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
+| fp16-prefix | 52 / 52 | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
+| int4 | 52 / 52 | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
+| int4-prefix | 52 / 52 | 100.0% | 100.0% | 100.0% | 100.0% | 100.0% |
+
+## Cache agreement
+
+Matching outputs can still be incorrect. Token agreement measures cache consistency, not task accuracy.
+```json
+{
+  "fp16": {
+    "n": 52,
+    "token_sequence_matches": 52,
+    "valid_parsed_answer_matches": 52
+  },
+  "int4": {
+    "n": 52,
+    "token_sequence_matches": 52,
+    "valid_parsed_answer_matches": 52
+  }
+}
+```
+
 ## Quality regressions
 
 ```json

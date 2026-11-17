@@ -70,7 +70,9 @@ def write_report(directory):
         cache_equivalence[precision] = {
             "n": len(before),
             "token_sequence_matches": sum(before[k].get("token_ids") == after[k].get("token_ids") for k in before),
-            "parsed_answer_matches": sum(before[k]["score"]["parsed"] == after[k]["score"]["parsed"] for k in before),
+            "valid_parsed_answer_matches": sum(
+                before[k]["score"]["valid_json_schema"] and after[k]["score"]["valid_json_schema"]
+                and before[k]["score"]["parsed"] == after[k]["score"]["parsed"] for k in before),
         }
     # Average repeated observations within case before bootstrapping: avoid pseudo-replication.
     case_means = {}
@@ -89,7 +91,8 @@ def write_report(directory):
     simulated = example["evidence"] != "measured_local_inference"
     comparison = {"evidence": example["evidence"], "production": False,
                   "summaries": summaries, "quality_gates": gates, "ttft_paired_ci": deltas,
-                  "cache_equivalence": cache_equivalence}
+                  "cache_equivalence": cache_equivalence,
+                  "quality_summaries": {v: quality_summary(rows) for v, rows in quality.items()}}
     (directory / "comparison.json").write_text(json.dumps(comparison, indent=2) + "\n")
     def fmt(value):
         return "not measured" if value is None else "%.3f" % value
@@ -120,6 +123,22 @@ def write_report(directory):
     for v, delta in deltas.items():
         lines.append("- %s: after − before = %.3f ms; case-bootstrap 95%% CI [%.3f, %.3f] ms." %
                      (v, delta["mean_after_minus_before"], *delta["ci95"]))
+    lines += ["", "## Quality diagnostics", "",
+              "Accuracy requires the exact expected decision and a valid schema. Valid JSON alone is insufficient.",
+              "No regressions means no previously correct cases became wrong; it does not mean the baseline is useful.",
+              "", "| Variant | Correct / total | Valid schema | Boundary | Missing | Invalid | Injection |",
+              "|---|---:|---:|---:|---:|---:|---:|"]
+    for v in VARIANTS:
+        q = quality_summary(quality[v])
+        by_tag = q["by_tag"]
+        tag_values = ["%.1f%%" % (by_tag[tag]["accuracy"] * 100) if tag in by_tag else "n/a"
+                      for tag in ("boundary", "missing", "invalid", "injection")]
+        lines.append("| %s | %d / %d | %.1f%% | %s |" % (
+            v, sum(r["score"]["correct"] for r in quality[v]), q["n"],
+            q["schema_valid_rate"] * 100, " | ".join(tag_values)))
+    lines += ["", "## Cache agreement", "",
+              "Matching outputs can still be incorrect. Token agreement measures cache consistency, not task accuracy.",
+              "```json", json.dumps(cache_equivalence, indent=2), "```"]
     lines += ["", "## Quality regressions", "", "```json", json.dumps(gates, indent=2), "```", "",
               "## Production status", "", "No production deployment or customer traffic is claimed."]
     (directory / "report.md").write_text("\n".join(lines) + "\n")
@@ -135,14 +154,13 @@ def write_report(directory):
 <details><summary>Full methodology and evidence</summary><pre>%s</pre></details></html>""" % (html.escape(title), rows, html.escape("\n".join(lines)))
     (directory / "report.html").write_text(page)
     if simulated:
-        answer = "NOT ELIGIBLE FOR AN INTERVIEW PERFORMANCE CLAIM: this run contains simulated fixtures only.\n"
+        summary = "SIMULATED TEST FIXTURE: no model performance was measured.\n"
     else:
-        answer = ("I implemented a local inference optimization study using %s on %s, comparing FP16, "
-                  "4-bit weight quantization, shared-prefix KV caching, and their combination. "
-                  "The attached report contains measured TTFT, ITL, serial throughput, memory, and "
-                  "quality regressions. Select only a variant that passes the quality gate and "
-                  "shows a repeatable improvement. This was a local portfolio benchmark, not production.\n") % (
-                      example["source_model"], json.dumps(example["environment"].get("gpus", [])))
-    (directory / "interview_draft.txt").write_text(answer)
+        passed = [v for v in VARIANTS if gates[v]["passed"]]
+        summary = ("Measured local inference for %s. Quality-passing variants: %s. "
+                   "Inspect the report for timing boundaries, quality failures, and uncertainty. "
+                   "No production deployment or monetary savings are established.\n") % (
+                       example["source_model"], ", ".join(passed) if passed else "none")
+    (directory / "evidence_summary.txt").write_text(summary)
     print("Report written to", directory / "report.html")
     return comparison

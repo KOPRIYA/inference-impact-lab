@@ -250,12 +250,106 @@
     "fp16": {
       "n": 52,
       "token_sequence_matches": 52,
-      "parsed_answer_matches": 52
+      "valid_parsed_answer_matches": 52
     },
     "int4": {
       "n": 52,
       "token_sequence_matches": 52,
-      "parsed_answer_matches": 52
+      "valid_parsed_answer_matches": 52
+    }
+  },
+  "quality_summaries": {
+    "fp16-prefix": {
+      "n": 52,
+      "accuracy": 1.0,
+      "schema_valid_rate": 1.0,
+      "by_tag": {
+        "boundary": {
+          "n": 24,
+          "accuracy": 1.0
+        },
+        "injection": {
+          "n": 8,
+          "accuracy": 1.0
+        },
+        "invalid": {
+          "n": 12,
+          "accuracy": 1.0
+        },
+        "missing": {
+          "n": 8,
+          "accuracy": 1.0
+        }
+      }
+    },
+    "fp16": {
+      "n": 52,
+      "accuracy": 1.0,
+      "schema_valid_rate": 1.0,
+      "by_tag": {
+        "boundary": {
+          "n": 24,
+          "accuracy": 1.0
+        },
+        "injection": {
+          "n": 8,
+          "accuracy": 1.0
+        },
+        "invalid": {
+          "n": 12,
+          "accuracy": 1.0
+        },
+        "missing": {
+          "n": 8,
+          "accuracy": 1.0
+        }
+      }
+    },
+    "int4-prefix": {
+      "n": 52,
+      "accuracy": 1.0,
+      "schema_valid_rate": 1.0,
+      "by_tag": {
+        "boundary": {
+          "n": 24,
+          "accuracy": 1.0
+        },
+        "injection": {
+          "n": 8,
+          "accuracy": 1.0
+        },
+        "invalid": {
+          "n": 12,
+          "accuracy": 1.0
+        },
+        "missing": {
+          "n": 8,
+          "accuracy": 1.0
+        }
+      }
+    },
+    "int4": {
+      "n": 52,
+      "accuracy": 1.0,
+      "schema_valid_rate": 1.0,
+      "by_tag": {
+        "boundary": {
+          "n": 24,
+          "accuracy": 1.0
+        },
+        "injection": {
+          "n": 8,
+          "accuracy": 1.0
+        },
+        "invalid": {
+          "n": 12,
+          "accuracy": 1.0
+        },
+        "missing": {
+          "n": 8,
+          "accuracy": 1.0
+        }
+      }
     }
   }
 }

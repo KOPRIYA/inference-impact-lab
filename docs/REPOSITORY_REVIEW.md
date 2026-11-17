@@ -1,0 +1,46 @@
+# Repository review
+
+## Completed in the publication cleanup
+
+- Added ignore rules for environments, model weights, local results, credentials,
+  machine files, and personal notes.
+- Moved application-oriented notes/drafts into ignored `local-notes/`; replaced the
+  report generator's personal draft with a neutral evidence summary.
+- Removed the tracked Finder metadata file from the working tree.
+- Updated stale execution-status documentation with real, failed-quality findings.
+- Added contribution guidance, offline GitHub Actions CI, and package README/URLs.
+- Added report quality diagnostics and corrected cache agreement so invalid parsed
+  outputs do not count as valid answer matches.
+
+The removed files remain in earlier commits. Ignore rules do not rewrite Git history.
+The next commit must include the tracked deletions as well as new/modified files.
+This cleanup does not publish, push, or change repository visibility.
+
+## Before calling it licensed open source
+
+The owner must choose a source-code license and add its LICENSE file/package metadata.
+Model weights and dependencies retain their own terms. No license has been assumed.
+If historical personal notes must be removed from existing remote history, plan that
+separately: renaming or ignoring files only removes them from future snapshots.
+
+## Research and engineering priorities
+
+1. Establish a useful baseline: current decision accuracy is 14/52. Investigate common
+   prompt/model suitability on a development set; retain a new held-out evaluation.
+2. Remove conflicting JSON/prose instructions in a versioned performance workload;
+   add natural JSON response timing. Keep old evidence immutable and rerun all variants.
+3. Add native GPU integration checks for cache copying, EOS behavior, memory pressure,
+   and model conversion. Offline mocks cannot substitute for these tests.
+4. Add mixed cache-hit workloads, eviction scenarios, concurrency/load sweeps, and
+   server-side latency before making service-capacity claims.
+5. Publish a sanitized raw evidence bundle plus dependency lock for independently
+   auditable performance claims. Add source commit/dirty state to future run provenance;
+   current metadata identifies models/workload/environment but not runner code revision.
+6. Strengthen report ingestion for arbitrary external evidence (schema/version validation,
+   complete expected quality-case coverage, contiguous rounds, finite values). Current
+   checks target files produced by this runner, not untrusted third-party uploads.
+7. Validate NVIDIA command generation against a pinned installed vLLM environment.
+   It remains a proposed extension, not a tested backend.
+
+Public experimental repositories can contain negative results. Preserve the failed gate
+and scope limitations instead of presenting these timings as production readiness.

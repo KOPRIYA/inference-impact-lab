@@ -1,0 +1,35 @@
+# Python environments and build products
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Model weights and downloaded caches
+/models/
+.cache/
+*.safetensors
+*.gguf
+
+# Local runs; keep the explicitly simulated public fixture
+/results/*
+!/results/example-fixture/
+
+# Personal notes and legacy generated application drafts
+/local-notes/
+**/interview_draft.txt
+/docs/INTERVIEW_GUIDE.md
+
+# Machine configuration and credentials
+.DS_Store
+.env
+.env.*
+!.env.example
+.aws/
+*.pem
+*.key

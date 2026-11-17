@@ -8,7 +8,7 @@ from inference_lab.demo import demo
 from inference_lab.metrics import paired_bootstrap_delta, percentile, request_metrics, summarize
 from inference_lab.prefix import PrefixSnapshot, common_prefix
 from inference_lab.quality import gate, score
-from inference_lab.report import read_runs
+from inference_lab.report import read_runs, write_report
 from inference_lab.workload import cases, messages, oracle
 
 
@@ -128,7 +128,7 @@ class PipelineTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             comparison = demo(directory)
             self.assertEqual(comparison["evidence"], "SIMULATED_TEST_FIXTURE")
-            self.assertIn("NOT ELIGIBLE", (Path(directory) / "interview_draft.txt").read_text())
+            self.assertIn("SIMULATED", (Path(directory) / "evidence_summary.txt").read_text())
             self.assertIn("SIMULATED", (Path(directory) / "report.html").read_text())
             path = Path(directory) / "int4-round-00.json"
             data = json.loads(path.read_text())
@@ -136,6 +136,21 @@ class PipelineTests(unittest.TestCase):
             path.write_text(json.dumps(data))
             with self.assertRaises(ValueError):
                 read_runs(directory)
+
+    def test_invalid_outputs_do_not_count_as_valid_cache_agreement(self):
+        with tempfile.TemporaryDirectory() as directory:
+            demo(directory)
+            for variant in ("fp16", "fp16-prefix"):
+                path = Path(directory) / (variant + "-round-00.json")
+                data = json.loads(path.read_text())
+                row = data["quality"][0]
+                row["text"] = "not JSON"
+                row["score"] = score(row["text"], {"action": "escalate", "policy_id": "MANUAL"})
+                path.write_text(json.dumps(data))
+            comparison = write_report(directory)
+            self.assertEqual(comparison["cache_equivalence"]["fp16"]["valid_parsed_answer_matches"], 51)
+            self.assertFalse(comparison["quality_gates"]["fp16"]["passed"])
+            self.assertIn("Quality diagnostics", (Path(directory) / "report.md").read_text())
 
     def test_refuse_overwrite(self):
         with tempfile.TemporaryDirectory() as directory:

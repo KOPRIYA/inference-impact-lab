@@ -19,5 +19,4 @@ made to having read inaccessible/paywalled chapters in full.
 
 Speculative decoding is deliberately a follow-on experiment, not an implemented claim.
 Its benefit depends on draft acceptance, extra draft cost, batching and target GPU utilization.
-Distillation requires an additional training/evaluation study. Neither should be added merely
-to list more optimization techniques in an interview answer.
+Distillation requires an additional training/evaluation study. Both require independent hypotheses, implementation, and measured evaluation.

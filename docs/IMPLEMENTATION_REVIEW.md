@@ -1,4 +1,4 @@
-# Review before GitHub publication
+# Implementation and measurement design
 
 ## Project 1 — Quantized retail-support inference
 
@@ -41,17 +41,16 @@ Warm-only TTFT should not be presented as the latency of a cold request.
 | `inference_lab/metrics.py` | TTFT/ITL/TPOT, percentiles, throughput, SLO rate, cost assumptions, paired bootstrap |
 | `inference_lab/workload.py` | Original fictional support policies, prompts, expected-decision oracle |
 | `inference_lab/quality.py` | Strict JSON scoring, per-category quality, regression gate |
-| `inference_lab/report.py` | Comparable-run validation, evidence tables, offline HTML and interview draft |
+| `inference_lab/report.py` | Comparable-run validation, evidence tables, offline HTML and evidence summary |
 | `inference_lab/server_eval.py` | Same quality checks against a supplied OpenAI-compatible endpoint |
 | `tests/` | Metric arithmetic, malformed outputs, cache isolation, provenance, endpoint contracts and stream accounting |
 
-## Remaining validation
+## Validation boundaries
 
-The offline suite executes in this session; native MLX and NVIDIA execution do not.
-The first real run must validate installation, conversion, native cache copying, stream
-behavior, memory fit and model quality. Capture the full environment lock and raw outputs.
-Do not describe the integration as validated until these commands complete successfully.
+A native Apple M5 run completed; see [VALIDATION.md](VALIDATION.md) and
+[RESULTS.md](RESULTS.md). All local quality gates failed. Native execution does not
+establish task suitability, broad model quality, or production readiness.
 
-Suggested publication name: `inference-impact-lab`. Repository ownership, visibility and
-permission to push are still to be confirmed by Komal. No credentials, model weights,
-private customer data or machine serial numbers belong in the repository.
+The cache is a single-process experiment without eviction or authorization. Performance
+uses fixed-length prose while quality uses short JSON; results are not an end-to-end
+benchmark of a production JSON service. NVIDIA serving remains unvalidated.
