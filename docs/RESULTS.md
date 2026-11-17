@@ -4,9 +4,10 @@
 
 Reviewed on 17 November 2026 from the local `results/local` run: 12 raw run files,
 three rounds, four variants, 12 performance requests per variant per round (144 total).
-The raw local files are ignored by Git; the committed example fixture is simulated
-and must not be used to reproduce these figures. This is a maintainer-reported result;
-independent auditing requires a reviewed raw evidence bundle.
+The reviewed raw run is exported in `evidence/apple-m5-v1/`, with checksums and
+a source review snapshot. The old run did not capture runner-code provenance; the
+export marks that gap. The committed example fixture remains simulated. These are
+v1 workload results and must not be relabeled as results of the revised v2 protocol.
 
 - Model: `Qwen/Qwen2.5-1.5B-Instruct`.
 - Revision: `989aa7980e4cf806f80c7fef2b1adb7bc71aa306`.

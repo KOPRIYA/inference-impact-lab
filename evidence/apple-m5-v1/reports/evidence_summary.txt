@@ -1,0 +1,1 @@
+Measured local inference for Qwen/Qwen2.5-1.5B-Instruct. Quality-passing variants: none. Inspect the report for timing boundaries, quality failures, and uncertainty. No production deployment or monetary savings are established.

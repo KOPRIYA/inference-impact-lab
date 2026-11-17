@@ -16,12 +16,19 @@ The removed files remain in earlier commits. Ignore rules do not rewrite Git his
 The next commit must include the tracked deletions as well as new/modified files.
 This cleanup does not publish, push, or change repository visibility.
 
-## Before calling it licensed open source
+## License and history
 
-The owner must choose a source-code license and add its LICENSE file/package metadata.
-Model weights and dependencies retain their own terms. No license has been assumed.
-If historical personal notes must be removed from existing remote history, plan that
-separately: renaming or ignoring files only removes them from future snapshots.
+Source code now uses the MIT License. Model weights and dependencies have separate terms.
+Ignored personal material still exists in earlier commits; this task does not rewrite history.
+
+## Version 2 implementation update
+
+The baseline/holdout protocol, unambiguous performance formats, native integration checks,
+controlled cache-hit study, concurrent HTTP driver, source fingerprints and evidence export
+are implemented. See [PROTOCOL.md](PROTOCOL.md). Native v2 results remain blocked by
+Metal access in the execution sandbox; no passing model baseline is yet claimed.
+The following original priorities remain useful research directions; implementation of
+an experiment is distinct from validation of its results.
 
 ## Research and engineering priorities
 

@@ -1,0 +1,52 @@
+{
+  "evidence": "measured_local_inference",
+  "source_matches_recorded_runs": false,
+  "raw_runner_fingerprints": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  "bundled_source": {
+    "source_sha256": "f106a5b33bbb451559bdca37ea0d9e8fac2e8412d25fa0fed0b4fc11e5f3f8f1",
+    "files": {
+      "inference_lab/__init__.py": "feb67e6bbca2e319ef3f74d3680cfef707fd8e7f9c176c5783f0c6709418757b",
+      "inference_lab/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+      "inference_lab/cache_study.py": "bb4b252edaf13edd42e3968b24e654fcd80466459189b0b9819302f77ad72612",
+      "inference_lab/cli.py": "8ef019c75c5e8c9a243c980c46fe1a6b9b14beb2b9e97c81fe5f16cabbfeed59",
+      "inference_lab/demo.py": "ce1d6257596c1bb19fc828ba22e188c8180ce3cc1a7aadb5144318260c9e41ba",
+      "inference_lab/evidence.py": "4481c6e6fe689b3aa28aa943df90a658fa8fbce03733108fbde2b83db2af9b8f",
+      "inference_lab/experiment.py": "d5b331ffc4c835aa4f6980994775ab065bfafba01642b03db24b07c05b45dc70",
+      "inference_lab/load_test.py": "4ca759933aabca35853da6cd8f4d2538916f20a040064f86c365b4ed8c9bad38",
+      "inference_lab/metrics.py": "87a1535b991425792f4ca20be66a0772a4e54da2e7c6e37703821a190fce1a7c",
+      "inference_lab/prefix.py": "ceed0e135cf0aa4e83ef0576647367bc0cecb6d974800e30ab709791584c702e",
+      "inference_lab/provenance.py": "27783f943a7f41445c98ab6b9b49247dcc8eaf423ccb27b5233018b945a28eb9",
+      "inference_lab/quality.py": "8a1b6ac93109cb428388510a7b69453765f51983d4367baa1f4e4ba65826b84f",
+      "inference_lab/report.py": "febdf7ef91a0f8eb5f2d794f723cab2de7a6b57b8669726013f471af7d3000a2",
+      "inference_lab/runtime.py": "b987df2aeb4fd2f0fbd537b7da1a06f5f15feee9f10c7b1e298349f9dcbf1f42",
+      "inference_lab/server_eval.py": "2612cff1d32013c84dc3c1c97606aa534727b66805cbe2af1c158567a9a3ff02",
+      "inference_lab/validation.py": "bff86977b2dfd538863d5755fad6009512dd666b02b97f2938eb13d40499757e",
+      "inference_lab/workload.py": "f3047d83df248669979561127d09cc20cf951efa8473903ad2fb12fe611005f8",
+      "pyproject.toml": "13a012fd3eef90c0c566340ba31bfa3d3a35127eb13ff37ad7723eaf676be433",
+      "scripts/nvidia_commands.py": "d5d4750d8d5c2afa2b7024fe82274e955077c2e76c0ae9334681961acda6601c",
+      "scripts/run_load_sweep.zsh": "4f85fd59717f0a4466b3c0931c55e31baf2bd99af83541825e8a3723010b098f",
+      "scripts/run_validated.zsh": "c4839720b4e9c0232cdb6542a8af7426a5b6d74ead4e6a4a5d94192e0b25154f",
+      "tests/test_adapters.py": "ff9ba31d8f81dc93b5e3dc173c1bd52a9870769b3d1f69f213c14c8fbde4bced",
+      "tests/test_core.py": "29c0a1f7988bdecc34913b4b55ca19b1a24eed76d48996f8f883c30b329a91d3",
+      "tests/test_protocol.py": "2569299ac975070c309bf3ae4b9806bca43764dcbe4a097dca31dac219c61aa3"
+    },
+    "git_commit": "81ae921e7e416c09c91a8c3dd90329a4a838ebd8",
+    "git_dirty": true
+  },
+  "review": "Allowlisted synthetic benchmark raw data; private-path/credential pattern scan passed. No weights or environment secrets exported.",
+  "reproduction": "Install source with .[mac], use recorded model revision, prepare weights, run matching config. runtime-versions.txt pins recorded direct packages only, not all transitive dependencies.",
+  "limitation": "Legacy runs did not record this runner fingerprint. Bundled source is a review snapshot, not proof of the exact original runner. Do not claim bit-for-bit reproduction."
+}

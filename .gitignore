@@ -33,3 +33,41 @@ htmlcov/
 .aws/
 *.pem
 *.key
+
+# Local editor, tool, and OS state
+.idea/
+.vscode/
+.agents/
+.codex/
+.ipynb_checkpoints/
+.mypy_cache/
+.ruff_cache/
+.tox/
+.nox/
+*.swp
+*.swo
+*~
+Thumbs.db
+
+# Runtime logs, recordings, and local experiment state
+/logs/
+/tmp/
+*.log
+*.pid
+*.prof
+*.trace
+.envrc
+.venv-*/
+.uv-cache/
+
+# Authentication material (examples should use placeholder text)
+.netrc
+.pypirc
+credentials*.json
+service-account*.json
+*.p12
+*.pfx
+
+# Evidence is opt-in: only the reviewed v1 bundle is public
+/evidence/*
+!/evidence/apple-m5-v1/

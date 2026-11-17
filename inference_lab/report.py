@@ -21,6 +21,9 @@ def read_runs(directory):
             ("evidence", "source_model", "source_revision", "workload_hash", "config", "environment", "seed")}, sort_keys=True))
     if len(signatures) != 1:
         raise ValueError("Runs differ in provenance, hardware, software, workload or configuration")
+    fingerprints = {r.get("provenance", {}).get("source_sha256") for r in runs}
+    if len(fingerprints) != 1:
+        raise ValueError("Runner source differs between runs")
     seen = set()
     grouped = defaultdict(list)
     for run in runs:
@@ -32,11 +35,17 @@ def read_runs(directory):
     if set(grouped) != set(VARIANTS):
         raise ValueError("All four variants are required")
     round_sets = {tuple(sorted(r["round"] for r in group)) for group in grouped.values()}
-    if len(round_sets) != 1 or 0 not in next(iter(round_sets)):
+    if len(round_sets) != 1 or next(iter(round_sets)) != tuple(range(len(next(iter(round_sets))))):
         raise ValueError("Variants must have matching rounds including round zero")
     request_sets = {tuple(sorted(r["id"] for r in run["requests"])) for run in runs}
     if len(request_sets) != 1 or any(len({r["id"] for r in run["requests"]}) != len(run["requests"]) for run in runs):
         raise ValueError("Performance request IDs must match and be unique per run")
+    for run in runs:
+        if run.get("provenance") and run["round"] == 0:
+            from .workload import cases
+            expected_ids = {c["id"] for c in cases(run["config"].get("quality_split", "development"))}
+            if {r["id"] for r in run["quality"]} != expected_ids or len(run["quality"]) != len(expected_ids):
+                raise ValueError("Incomplete quality split")
     hourly_costs = {r["summary"]["hourly_cost_assumption"] for r in runs}
     if len(hourly_costs) != 1:
         raise ValueError("Cost assumptions differ")
@@ -117,7 +126,9 @@ def write_report(directory):
         "ITL percentiles pool token gaps. TPOT is per-request mean inter-token gap and is reported separately in JSON.",
         "Peak memory is MLX allocator memory, not total system RAM or dedicated VRAM. Disk size is not GPU memory.",
         "Cost is an explicit hourly allocation model, not a bill. No hourly price supplied means no cost estimate.",
-        "The performance suite forces a fixed output budget. The 52-case quality suite uses natural EOS stopping.",
+        ("Performance uses a fixed prose output budget." if example["config"].get("fixed_length_performance", True)
+         else "Performance uses natural JSON stopping; output lengths can differ, so compare latency and quality together."),
+        "Quality suite: %d cases, natural EOS stopping." % len(quality["fp16"]),
         "Confidence intervals resample case means, not individual tokens. Small synthetic samples do not establish production impact.",
         "", "## Paired TTFT changes", ""]
     for v, delta in deltas.items():

@@ -30,5 +30,5 @@ Use a new output directory each time. Native MLX runs need Apple Silicon and the
 - Raw local runs are ignored by default. Publish a reviewed, sanitized evidence bundle
   separately when independent reproduction of a measured claim is required.
 
-The maintainer still needs to select a source-code license before this can be offered
-as licensed open-source software. Dependencies and model weights have separate terms.
+Source code is licensed under the [MIT License](LICENSE). Dependencies and model
+weights have separate terms.

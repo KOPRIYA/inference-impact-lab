@@ -1,0 +1,120 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width">
+<title>Inference Impact Lab</title><style>body{font:16px system-ui;max-width:1100px;margin:50px auto;padding:24px;background:#101823;color:#e5edf5}h1{color:#71e0c0}table{border-collapse:collapse;width:100%}td,th{padding:14px;text-align:left;border-bottom:1px solid #405060}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#1c2938;padding:24px}summary{cursor:pointer;margin:24px 0}p{line-height:1.7}</style>
+<h1>Inference Impact Lab</h1><p><strong>Local inference measurements — not production</strong></p><p>Two controlled experiments: 4-bit weight quantization and exact-prefix KV reuse.</p>
+<table><tr><th>Variant</th><th>TTFT p50 (ms)</th><th>ITL p50 (ms)</th><th>Output tokens/s</th><th>Quality gate</th></tr><tr><td>fp16-prefix</td><td>92.713</td><td>28.185</td><td>33.675</td><td>FAIL</td></tr><tr><td>fp16</td><td>768.023</td><td>28.773</td><td>27.482</td><td>FAIL</td></tr><tr><td>int4-prefix</td><td>71.546</td><td>10.868</td><td>84.984</td><td>FAIL</td></tr><tr><td>int4</td><td>630.194</td><td>10.774</td><td>62.205</td><td>FAIL</td></tr></table>
+<details><summary>Full methodology and evidence</summary><pre># Local inference measurements — not production
+
+Model: `Qwen/Qwen2.5-1.5B-Instruct` at `989aa7980e4cf806f80c7fef2b1adb7bc71aa306`.
+
+Hardware: [{&quot;sppci_model&quot;: &quot;Apple M5&quot;, &quot;sppci_cores&quot;: &quot;10&quot;}].
+
+| Variant | TTFT p50 / p95 ms | ITL p50 / p95 ms | Output tok/s | Peak MLX GB | Accuracy | Gate | Est. $/1M output tokens |
+|---|---:|---:|---:|---:|---:|---|---:|
+| fp16 | 768.023 / 894.270 | 28.773 / 41.076 | 27.482 | 3.359 | 26.9% | FAIL | not measured |
+| fp16-prefix | 92.713 / 113.531 | 28.185 / 34.903 | 33.675 | 3.186 | 26.9% | FAIL | not measured |
+| int4 | 630.194 / 762.501 | 10.774 / 13.811 | 62.205 | 1.313 | 28.8% | FAIL | not measured |
+| int4-prefix | 71.546 / 98.834 | 10.868 / 13.451 | 84.984 | 1.070 | 28.8% | FAIL | not measured |
+
+## Interpretation
+
+Compare fp16→int4 for quantization; fp16→fp16-prefix for caching; fp16→int4-prefix for the combination.
+No faster variant is recommended automatically. A failed quality gate disqualifies it.
+TTFT and ITL are in-process token availability, excluding tokenization, model load and network time.
+Throughput uses total measured request wall time; it is serial throughput at concurrency 1, not server capacity.
+Prefix rows measure warm hits. comparison.json also includes throughput/cost including one prefix fill per round.
+ITL percentiles pool token gaps. TPOT is per-request mean inter-token gap and is reported separately in JSON.
+Peak memory is MLX allocator memory, not total system RAM or dedicated VRAM. Disk size is not GPU memory.
+Cost is an explicit hourly allocation model, not a bill. No hourly price supplied means no cost estimate.
+The performance suite forces a fixed output budget. The 52-case quality suite uses natural EOS stopping.
+Confidence intervals resample case means, not individual tokens. Small synthetic samples do not establish production impact.
+
+## Paired TTFT changes
+
+- fp16-prefix: after − before = -627.875 ms; case-bootstrap 95% CI [-673.371, -582.282] ms.
+- int4: after − before = -87.324 ms; case-bootstrap 95% CI [-152.844, -25.781] ms.
+- int4-prefix: after − before = -644.611 ms; case-bootstrap 95% CI [-690.119, -599.684] ms.
+
+## Quality diagnostics
+
+Accuracy requires the exact expected decision and a valid schema. Valid JSON alone is insufficient.
+No regressions means no previously correct cases became wrong; it does not mean the baseline is useful.
+
+| Variant | Correct / total | Valid schema | Boundary | Missing | Invalid | Injection |
+|---|---:|---:|---:|---:|---:|---:|
+| fp16 | 14 / 52 | 98.1% | 58.3% | 0.0% | 0.0% | 0.0% |
+| fp16-prefix | 14 / 52 | 98.1% | 58.3% | 0.0% | 0.0% | 0.0% |
+| int4 | 15 / 52 | 100.0% | 62.5% | 0.0% | 0.0% | 0.0% |
+| int4-prefix | 15 / 52 | 100.0% | 62.5% | 0.0% | 0.0% | 0.0% |
+
+## Cache agreement
+
+Matching outputs can still be incorrect. Token agreement measures cache consistency, not task accuracy.
+```json
+{
+  &quot;fp16&quot;: {
+    &quot;n&quot;: 52,
+    &quot;token_sequence_matches&quot;: 52,
+    &quot;valid_parsed_answer_matches&quot;: 51
+  },
+  &quot;int4&quot;: {
+    &quot;n&quot;: 52,
+    &quot;token_sequence_matches&quot;: 52,
+    &quot;valid_parsed_answer_matches&quot;: 52
+  }
+}
+```
+
+## Quality regressions
+
+```json
+{
+  &quot;fp16&quot;: {
+    &quot;passed&quot;: false,
+    &quot;baseline_accuracy&quot;: 0.2692307692307692,
+    &quot;candidate_accuracy&quot;: 0.2692307692307692,
+    &quot;accuracy_delta&quot;: 0.0,
+    &quot;min_accuracy&quot;: 0.95,
+    &quot;max_absolute_drop&quot;: 0.02,
+    &quot;critical_cases_all_pass&quot;: false,
+    &quot;regressions&quot;: [],
+    &quot;caveat&quot;: &quot;Small synthetic regression suite; not production quality certification.&quot;
+  },
+  &quot;fp16-prefix&quot;: {
+    &quot;passed&quot;: false,
+    &quot;baseline_accuracy&quot;: 0.2692307692307692,
+    &quot;candidate_accuracy&quot;: 0.2692307692307692,
+    &quot;accuracy_delta&quot;: 0.0,
+    &quot;min_accuracy&quot;: 0.95,
+    &quot;max_absolute_drop&quot;: 0.02,
+    &quot;critical_cases_all_pass&quot;: false,
+    &quot;regressions&quot;: [],
+    &quot;caveat&quot;: &quot;Small synthetic regression suite; not production quality certification.&quot;
+  },
+  &quot;int4&quot;: {
+    &quot;passed&quot;: false,
+    &quot;baseline_accuracy&quot;: 0.2692307692307692,
+    &quot;candidate_accuracy&quot;: 0.28846153846153844,
+    &quot;accuracy_delta&quot;: 0.019230769230769218,
+    &quot;min_accuracy&quot;: 0.95,
+    &quot;max_absolute_drop&quot;: 0.02,
+    &quot;critical_cases_all_pass&quot;: false,
+    &quot;regressions&quot;: [],
+    &quot;caveat&quot;: &quot;Small synthetic regression suite; not production quality certification.&quot;
+  },
+  &quot;int4-prefix&quot;: {
+    &quot;passed&quot;: false,
+    &quot;baseline_accuracy&quot;: 0.2692307692307692,
+    &quot;candidate_accuracy&quot;: 0.28846153846153844,
+    &quot;accuracy_delta&quot;: 0.019230769230769218,
+    &quot;min_accuracy&quot;: 0.95,
+    &quot;max_absolute_drop&quot;: 0.02,
+    &quot;critical_cases_all_pass&quot;: false,
+    &quot;regressions&quot;: [],
+    &quot;caveat&quot;: &quot;Small synthetic regression suite; not production quality certification.&quot;
+  }
+}
+```
+
+## Production status
+
+No production deployment or customer traffic is claimed.</pre></details></html>

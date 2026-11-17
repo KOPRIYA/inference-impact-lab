@@ -28,6 +28,9 @@ def main(argv=None):
         sub.add_argument("--tokens", type=positive, default=128)
         sub.add_argument("--warmups", type=positive, default=2)
         sub.add_argument("--seed", type=int, default=17)
+        sub.add_argument("--quality-split", choices=["development", "heldout"], default="development")
+        sub.add_argument("--freeze")
+        sub.add_argument("--performance-mode", choices=["fixed-prose", "natural-json"], default="fixed-prose")
         sub.add_argument("--hourly-cost", type=float, default=None, help="Explicit allocated machine cost in USD/hour; no default")
         sub.add_argument("--ttft-slo-ms", type=float, default=2000)
         sub.add_argument("--tpot-slo-ms", type=float, default=100)
@@ -42,9 +45,41 @@ def main(argv=None):
     server.add_argument("--base-url", default="http://127.0.0.1:8000/v1")
     server.add_argument("--model", required=True)
     server.add_argument("--out", required=True)
+    for name in ("assess", "native-check", "cache-study"):
+        sub = subs.add_parser(name)
+        sub.add_argument("--models", default="models/qwen")
+        sub.add_argument("--out", required=True)
+        if name == "assess":
+            sub.add_argument("--split", choices=["development", "heldout"], default="development")
+            sub.add_argument("--freeze")
+    bundle = subs.add_parser("bundle")
+    bundle.add_argument("directory")
+    bundle.add_argument("--out", required=True)
+    bundle.add_argument("--validation-dir", help="Include native/freeze/heldout/cache-study evidence from this directory")
+    verify = subs.add_parser("verify-bundle")
+    verify.add_argument("directory")
+    load = subs.add_parser("load-test")
+    load.add_argument("--base-url", default="http://127.0.0.1:8000/v1")
+    load.add_argument("--model", required=True)
+    load.add_argument("--out", required=True)
+    load.add_argument("--requests", type=positive, default=24)
+    load.add_argument("--concurrency", type=positive, default=4)
+    load.add_argument("--reuse", type=float, default=0.5)
     args = parser.parse_args(argv)
     try:
-        if args.command == "doctor":
+        if args.command in ("assess", "native-check"):
+            from .validation import assess, native_check
+            (assess if args.command == "assess" else native_check)(args)
+        elif args.command == "cache-study":
+            from .cache_study import run_study
+            run_study(args)
+        elif args.command in ("bundle", "verify-bundle"):
+            from .evidence import bundle, verify
+            (bundle(args.directory, args.out, args.validation_dir) if args.command == "bundle" else verify(args.directory))
+        elif args.command == "load-test":
+            from .load_test import run_load
+            run_load(args)
+        elif args.command == "doctor":
             from .runtime import environment
             data = environment()
             data["mlx_ready"] = all(data["packages"].get(p) for p in ("mlx", "mlx-lm"))

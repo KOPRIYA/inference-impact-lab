@@ -9,7 +9,7 @@ The fictional retailer and policies are original synthetic data, not Flipkart po
 
 ## Current evidence status
 
-A local Apple M5 run (10 GPU cores, 16 GB unified memory) completed all four variants
+The original v1 workload's local Apple M5 run (10 GPU cores, 16 GB unified memory) completed all four variants
 across three rounds. Combined quantization and warm-prefix reuse reduced median TTFT
 from 768.0 to 71.5 ms and increased serial output throughput from 27.48 to 84.98 tokens/s.
 **All quality gates failed:** FP16 accuracy was 14/52 (26.9%) and INT4 accuracy was
@@ -157,5 +157,114 @@ No script commits, pushes, publishes, rents a GPU or creates cloud resources.
 See [CONTRIBUTING.md](CONTRIBUTING.md) for offline checks and evidence requirements,
 and [docs/REPOSITORY_REVIEW.md](docs/REPOSITORY_REVIEW.md) for remaining work.
 The project is an experimental benchmark, not a return-decision service.
-A source-code license has not yet been selected; model weights and dependencies retain
-their own licenses. Public visibility alone does not grant an open-source license.
+Source code is licensed under the [MIT License](LICENSE). Model weights and
+dependencies retain their separate licenses.
+
+## Version 2 validation workflow
+
+The revised baseline is a **candidate, not yet a demonstrated quality pass**. It has a
+concise ordered policy and separate format instructions; quality no longer includes the
+irrelevant catalogue. The original 52 cases are development data; a new 64-case synthetic
+holdout is reserved for evaluation after selection. See [PROTOCOL.md](docs/PROTOCOL.md).
+
+With prepared models and the Mac environment installed, run from a normal Terminal:
+
+```bash
+zsh scripts/run_validated.zsh
+```
+
+This runs native GPU checks, assesses/freezes the development baseline, evaluates the
+heldout baseline, runs fresh three-round fixed-prose and natural-JSON comparisons,
+exports verifiable evidence, and measures controlled 0/50/100% prefix hits. It stops on
+failed baseline gates. Do not edit source while it runs. Existing results are preserved.
+This environment cannot access Metal, so fresh GPU comparisons are pending.
+
+For an already running compatible HTTP inference server:
+
+```bash
+zsh scripts/run_load_sweep.zsh
+```
+
+This measures bounded concurrent HTTP requests at concurrency 1/2/4/8 and offered prefix
+reuse 0/50/100%. Offered reuse is not an observed cache-hit rate. These results must be
+kept separate from in-process MLX timings; record server provenance and cache metrics.
+
+## Auditable original evidence
+
+The original failed-quality run is exported under `evidence/apple-m5-v1/` with raw token
+measurements, quality outputs, checksums, reports, and a source review snapshot. Verify:
+
+```bash
+python3 -m inference_lab verify-bundle evidence/apple-m5-v1
+```
+
+The old run did not record a runner source fingerprint; its bundle explicitly marks
+that provenance gap. New runs capture a source fingerprint plus Git commit/dirty state.
+
+## Local Qwen HTTP server (macOS)
+
+The scripts use the installed MLX-LM 0.32.2 server. `/v1/models` is a discovery endpoint;
+requests are generated through `/v1/chat/completions`. Run these from a normal macOS
+Terminal with GPU access. The server is loopback-only, intended for local experiments.
+
+**Terminal 1 — setup and start:**
+
+```bash
+cd /path/to/inference-impact-lab
+zsh scripts/setup_local.zsh
+zsh scripts/serve_local.zsh
+```
+
+Setup reuses an existing `.venv` and prepared `models/qwen` without overwriting weights.
+If model preparation previously stopped midway, choose a new `MODEL_DIR` rather than
+removing potentially useful artifacts. The default server uses the prepared INT4 model.
+Use `PRECISION=fp16 zsh scripts/serve_local.zsh` for FP16. Stop one server before starting
+another; both use port 8000. Stop with Ctrl+C; no background processes or PID files are created.
+
+**Terminal 2 — check and measure:**
+
+```bash
+cd /path/to/inference-impact-lab
+curl --fail http://127.0.0.1:8000/v1/models
+zsh scripts/check_server.zsh
+zsh scripts/run_load_sweep.zsh
+```
+
+The MLX server maps `default_model` to its startup model; scripts use this alias by default.
+Its model listing can contain the local absolute model path, which need not be copied into
+public reports. `MODEL_ID` and `BASE_URL` overrides remain available for other compatible
+servers. The check calls model discovery and generates a short answer; discovery alone
+is not proof that generation works. The load sweep also saves a development quality check.
+It does not certify quality or measure exact per-token ITL over HTTP.
+
+Server settings: decode concurrency 8, prompt concurrency 4, prefill chunks 256, eight
+prompt-cache entries with a 512 MB byte limit, maximum 128 generated tokens by default.
+No KV quantization is enabled. Record server settings/model precision with each experiment;
+client concurrency is different from the server's actual batching behavior.
+
+**Offline checks and direct GPU comparisons:**
+
+```bash
+zsh scripts/check_local.zsh
+# Stop the HTTP server first to avoid competing GPU workloads.
+zsh scripts/run_validated.zsh
+```
+
+Offline checks run the unit tests, generate a clearly labeled simulated report, and verify
+the reviewed evidence bundle. The validated workflow requires a passing native check and
+baseline; it stops on failures and never loosens the gate. Each invocation creates a unique
+ignored results directory. No activation command or sudo is needed: scripts use `.venv/bin/python`.
+
+| Override | Default | Purpose |
+|---|---|---|
+| `PYTHON_BOOTSTRAP` | Python 3.12 or 3.11 on PATH | Interpreter for creating a new environment |
+| `PYTHON_BIN` | `.venv/bin/python` | Interpreter used by scripts |
+| `MODEL_DIR` | `models/qwen` | Prepared FP16/INT4 models and manifest |
+| `PRECISION` | `int4` | Model selected by the local server |
+| `MODEL_ID` | `default_model` | Model alias sent by HTTP clients |
+| `BASE_URL` | `http://127.0.0.1:8000/v1` | Client API root |
+
+Local notes, credentials, editor/tool state, weights, logs, environments and raw run
+outputs are ignored. Only the explicitly reviewed `evidence/apple-m5-v1` bundle and
+simulated example fixture are opted into public artifacts. Review new evidence before
+changing that allowlist. Ignore rules do not remove material from Git history.
