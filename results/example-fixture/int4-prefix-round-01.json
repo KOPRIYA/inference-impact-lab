@@ -1,0 +1,218 @@
+{
+  "schema_version": 1,
+  "evidence": "SIMULATED_TEST_FIXTURE",
+  "production": false,
+  "variant": "int4-prefix",
+  "round": 1,
+  "seed": 17,
+  "environment": {
+    "gpus": [
+      "NONE \u2014 simulated fixture"
+    ]
+  },
+  "source_model": "NO_MODEL_EXECUTED",
+  "source_revision": "fixture",
+  "model_identity": "fixture",
+  "workload_hash": "5667cf585b0ce00c0feac1282af325e61a57d08ad9cdedbfc12ec0c0bbb4448f",
+  "config": {
+    "output_tokens": 3,
+    "ttft_slo_ms": 2000,
+    "tpot_slo_ms": 100
+  },
+  "model_bytes_on_disk": 0,
+  "peak_mlx_allocated_bytes": 0,
+  "prefix_setup_seconds": 0,
+  "summary": {
+    "attempted": 12,
+    "successful": 12,
+    "failed": 0,
+    "output_tokens": 36,
+    "wall_seconds": 1.8,
+    "setup_seconds": 0,
+    "ttft_ms": {
+      "n": 12,
+      "p50": 100.0,
+      "p95": 100.0,
+      "mean": 100.0
+    },
+    "itl_ms": {
+      "n": 24,
+      "p50": 20.000000000000004,
+      "p95": 20.000000000000018,
+      "mean": 20.000000000000004
+    },
+    "tpot_ms": {
+      "n": 12,
+      "p50": 20.000000000000004,
+      "p95": 20.000000000000004,
+      "mean": 20.000000000000004
+    },
+    "e2e_ms": {
+      "n": 12,
+      "p50": 150.0,
+      "p95": 150.0,
+      "mean": 150.0
+    },
+    "output_tokens_per_second": 20.0,
+    "requests_per_second": 6.666666666666666,
+    "slo_requests_per_second": 6.666666666666666,
+    "setup_inclusive_tokens_per_second": 20.0,
+    "estimated_cost_per_1m_output_tokens": null,
+    "setup_inclusive_cost_per_1m_output_tokens": null,
+    "estimated_cost_per_1k_requests": null,
+    "hourly_cost_assumption": null
+  },
+  "requests": [
+    {
+      "output_tokens": 3,
+      "ttft_ms": 100.0,
+      "itl_ms": [
+        19.99999999999999,
+        20.000000000000018
+      ],
+      "tpot_ms": 20.000000000000004,
+      "e2e_ms": 150.0,
+      "id": "fashion-00",
+      "text": "fixture"
+    },
+    {
+      "output_tokens": 3,
+      "ttft_ms": 100.0,
+      "itl_ms": [
+        19.99999999999999,
+        20.000000000000018
+      ],
+      "tpot_ms": 20.000000000000004,
+      "e2e_ms": 150.0,
+      "id": "fashion-01",
+      "text": "fixture"
+    },
+    {
+      "output_tokens": 3,
+      "ttft_ms": 100.0,
+      "itl_ms": [
+        19.99999999999999,
+        20.000000000000018
+      ],
+      "tpot_ms": 20.000000000000004,
+      "e2e_ms": 150.0,
+      "id": "fashion-02",
+      "text": "fixture"
+    },
+    {
+      "output_tokens": 3,
+      "ttft_ms": 100.0,
+      "itl_ms": [
+        19.99999999999999,
+        20.000000000000018
+      ],
+      "tpot_ms": 20.000000000000004,
+      "e2e_ms": 150.0,
+      "id": "fashion-03",
+      "text": "fixture"
+    },
+    {
+      "output_tokens": 3,
+      "ttft_ms": 100.0,
+      "itl_ms": [
+        19.99999999999999,
+        20.000000000000018
+      ],
+      "tpot_ms": 20.000000000000004,
+      "e2e_ms": 150.0,
+      "id": "fashion-04",
+      "text": "fixture"
+    },
+    {
+      "output_tokens": 3,
+      "ttft_ms": 100.0,
+      "itl_ms": [
+        19.99999999999999,
+        20.000000000000018
+      ],
+      "tpot_ms": 20.000000000000004,
+      "e2e_ms": 150.0,
+      "id": "fashion-05",
+      "text": "fixture"
+    },
+    {
+      "output_tokens": 3,
+      "ttft_ms": 100.0,
+      "itl_ms": [
+        19.99999999999999,
+        20.000000000000018
+      ],
+      "tpot_ms": 20.000000000000004,
+      "e2e_ms": 150.0,
+      "id": "fashion-06",
+      "text": "fixture"
+    },
+    {
+      "output_tokens": 3,
+      "ttft_ms": 100.0,
+      "itl_ms": [
+        19.99999999999999,
+        20.000000000000018
+      ],
+      "tpot_ms": 20.000000000000004,
+      "e2e_ms": 150.0,
+      "id": "fashion-07",
+      "text": "fixture"
+    },
+    {
+      "output_tokens": 3,
+      "ttft_ms": 100.0,
+      "itl_ms": [
+        19.99999999999999,
+        20.000000000000018
+      ],
+      "tpot_ms": 20.000000000000004,
+      "e2e_ms": 150.0,
+      "id": "fashion-08",
+      "text": "fixture"
+    },
+    {
+      "output_tokens": 3,
+      "ttft_ms": 100.0,
+      "itl_ms": [
+        19.99999999999999,
+        20.000000000000018
+      ],
+      "tpot_ms": 20.000000000000004,
+      "e2e_ms": 150.0,
+      "id": "fashion-09",
+      "text": "fixture"
+    },
+    {
+      "output_tokens": 3,
+      "ttft_ms": 100.0,
+      "itl_ms": [
+        19.99999999999999,
+        20.000000000000018
+      ],
+      "tpot_ms": 20.000000000000004,
+      "e2e_ms": 150.0,
+      "id": "fashion-10",
+      "text": "fixture"
+    },
+    {
+      "output_tokens": 3,
+      "ttft_ms": 100.0,
+      "itl_ms": [
+        19.99999999999999,
+        20.000000000000018
+      ],
+      "tpot_ms": 20.000000000000004,
+      "e2e_ms": 150.0,
+      "id": "fashion-11",
+      "text": "fixture"
+    }
+  ],
+  "quality": [],
+  "quality_summary": {
+    "n": 0,
+    "accuracy": null,
+    "schema_valid_rate": null,
+    "by_tag": {}
+  }
+}

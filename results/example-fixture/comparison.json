@@ -1,0 +1,261 @@
+{
+  "evidence": "SIMULATED_TEST_FIXTURE",
+  "production": false,
+  "summaries": {
+    "fp16-prefix": {
+      "attempted": 36,
+      "successful": 36,
+      "failed": 0,
+      "output_tokens": 108,
+      "wall_seconds": 5.4,
+      "setup_seconds": 0,
+      "ttft_ms": {
+        "n": 36,
+        "p50": 100.0,
+        "p95": 100.0,
+        "mean": 100.0
+      },
+      "itl_ms": {
+        "n": 72,
+        "p50": 20.000000000000004,
+        "p95": 20.000000000000018,
+        "mean": 20.000000000000004
+      },
+      "tpot_ms": {
+        "n": 36,
+        "p50": 20.000000000000004,
+        "p95": 20.000000000000004,
+        "mean": 20.000000000000004
+      },
+      "e2e_ms": {
+        "n": 36,
+        "p50": 150.0,
+        "p95": 150.0,
+        "mean": 150.0
+      },
+      "output_tokens_per_second": 20.0,
+      "requests_per_second": 6.666666666666666,
+      "slo_requests_per_second": 6.666666666666666,
+      "setup_inclusive_tokens_per_second": 20.0,
+      "estimated_cost_per_1m_output_tokens": null,
+      "setup_inclusive_cost_per_1m_output_tokens": null,
+      "estimated_cost_per_1k_requests": null,
+      "hourly_cost_assumption": null,
+      "max_peak_mlx_gb": 0.0,
+      "model_disk_gb": 0.0
+    },
+    "fp16": {
+      "attempted": 36,
+      "successful": 36,
+      "failed": 0,
+      "output_tokens": 108,
+      "wall_seconds": 5.4,
+      "setup_seconds": 0,
+      "ttft_ms": {
+        "n": 36,
+        "p50": 100.0,
+        "p95": 100.0,
+        "mean": 100.0
+      },
+      "itl_ms": {
+        "n": 72,
+        "p50": 20.000000000000004,
+        "p95": 20.000000000000018,
+        "mean": 20.000000000000004
+      },
+      "tpot_ms": {
+        "n": 36,
+        "p50": 20.000000000000004,
+        "p95": 20.000000000000004,
+        "mean": 20.000000000000004
+      },
+      "e2e_ms": {
+        "n": 36,
+        "p50": 150.0,
+        "p95": 150.0,
+        "mean": 150.0
+      },
+      "output_tokens_per_second": 20.0,
+      "requests_per_second": 6.666666666666666,
+      "slo_requests_per_second": 6.666666666666666,
+      "setup_inclusive_tokens_per_second": 20.0,
+      "estimated_cost_per_1m_output_tokens": null,
+      "setup_inclusive_cost_per_1m_output_tokens": null,
+      "estimated_cost_per_1k_requests": null,
+      "hourly_cost_assumption": null,
+      "max_peak_mlx_gb": 0.0,
+      "model_disk_gb": 0.0
+    },
+    "int4-prefix": {
+      "attempted": 36,
+      "successful": 36,
+      "failed": 0,
+      "output_tokens": 108,
+      "wall_seconds": 5.4,
+      "setup_seconds": 0,
+      "ttft_ms": {
+        "n": 36,
+        "p50": 100.0,
+        "p95": 100.0,
+        "mean": 100.0
+      },
+      "itl_ms": {
+        "n": 72,
+        "p50": 20.000000000000004,
+        "p95": 20.000000000000018,
+        "mean": 20.000000000000004
+      },
+      "tpot_ms": {
+        "n": 36,
+        "p50": 20.000000000000004,
+        "p95": 20.000000000000004,
+        "mean": 20.000000000000004
+      },
+      "e2e_ms": {
+        "n": 36,
+        "p50": 150.0,
+        "p95": 150.0,
+        "mean": 150.0
+      },
+      "output_tokens_per_second": 20.0,
+      "requests_per_second": 6.666666666666666,
+      "slo_requests_per_second": 6.666666666666666,
+      "setup_inclusive_tokens_per_second": 20.0,
+      "estimated_cost_per_1m_output_tokens": null,
+      "setup_inclusive_cost_per_1m_output_tokens": null,
+      "estimated_cost_per_1k_requests": null,
+      "hourly_cost_assumption": null,
+      "max_peak_mlx_gb": 0.0,
+      "model_disk_gb": 0.0
+    },
+    "int4": {
+      "attempted": 36,
+      "successful": 36,
+      "failed": 0,
+      "output_tokens": 108,
+      "wall_seconds": 5.4,
+      "setup_seconds": 0,
+      "ttft_ms": {
+        "n": 36,
+        "p50": 100.0,
+        "p95": 100.0,
+        "mean": 100.0
+      },
+      "itl_ms": {
+        "n": 72,
+        "p50": 20.000000000000004,
+        "p95": 20.000000000000018,
+        "mean": 20.000000000000004
+      },
+      "tpot_ms": {
+        "n": 36,
+        "p50": 20.000000000000004,
+        "p95": 20.000000000000004,
+        "mean": 20.000000000000004
+      },
+      "e2e_ms": {
+        "n": 36,
+        "p50": 150.0,
+        "p95": 150.0,
+        "mean": 150.0
+      },
+      "output_tokens_per_second": 20.0,
+      "requests_per_second": 6.666666666666666,
+      "slo_requests_per_second": 6.666666666666666,
+      "setup_inclusive_tokens_per_second": 20.0,
+      "estimated_cost_per_1m_output_tokens": null,
+      "setup_inclusive_cost_per_1m_output_tokens": null,
+      "estimated_cost_per_1k_requests": null,
+      "hourly_cost_assumption": null,
+      "max_peak_mlx_gb": 0.0,
+      "model_disk_gb": 0.0
+    }
+  },
+  "quality_gates": {
+    "fp16": {
+      "passed": true,
+      "baseline_accuracy": 1.0,
+      "candidate_accuracy": 1.0,
+      "accuracy_delta": 0.0,
+      "min_accuracy": 0.95,
+      "max_absolute_drop": 0.02,
+      "critical_cases_all_pass": true,
+      "regressions": [],
+      "caveat": "Small synthetic regression suite; not production quality certification."
+    },
+    "fp16-prefix": {
+      "passed": true,
+      "baseline_accuracy": 1.0,
+      "candidate_accuracy": 1.0,
+      "accuracy_delta": 0.0,
+      "min_accuracy": 0.95,
+      "max_absolute_drop": 0.02,
+      "critical_cases_all_pass": true,
+      "regressions": [],
+      "caveat": "Small synthetic regression suite; not production quality certification."
+    },
+    "int4": {
+      "passed": true,
+      "baseline_accuracy": 1.0,
+      "candidate_accuracy": 1.0,
+      "accuracy_delta": 0.0,
+      "min_accuracy": 0.95,
+      "max_absolute_drop": 0.02,
+      "critical_cases_all_pass": true,
+      "regressions": [],
+      "caveat": "Small synthetic regression suite; not production quality certification."
+    },
+    "int4-prefix": {
+      "passed": true,
+      "baseline_accuracy": 1.0,
+      "candidate_accuracy": 1.0,
+      "accuracy_delta": 0.0,
+      "min_accuracy": 0.95,
+      "max_absolute_drop": 0.02,
+      "critical_cases_all_pass": true,
+      "regressions": [],
+      "caveat": "Small synthetic regression suite; not production quality certification."
+    }
+  },
+  "ttft_paired_ci": {
+    "fp16-prefix": {
+      "mean_after_minus_before": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "independent_cases": 12,
+      "bootstrap_seed": 17
+    },
+    "int4": {
+      "mean_after_minus_before": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "independent_cases": 12,
+      "bootstrap_seed": 17
+    },
+    "int4-prefix": {
+      "mean_after_minus_before": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "independent_cases": 12,
+      "bootstrap_seed": 17
+    }
+  },
+  "cache_equivalence": {
+    "fp16": {
+      "n": 52,
+      "token_sequence_matches": 52,
+      "parsed_answer_matches": 52
+    },
+    "int4": {
+      "n": 52,
+      "token_sequence_matches": 52,
+      "parsed_answer_matches": 52
+    }
+  }
+}

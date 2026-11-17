@@ -1,0 +1,964 @@
+{
+  "schema_version": 1,
+  "evidence": "SIMULATED_TEST_FIXTURE",
+  "production": false,
+  "variant": "fp16-prefix",
+  "round": 0,
+  "seed": 17,
+  "environment": {
+    "gpus": [
+      "NONE \u2014 simulated fixture"
+    ]
+  },
+  "source_model": "NO_MODEL_EXECUTED",
+  "source_revision": "fixture",
+  "model_identity": "fixture",
+  "workload_hash": "5667cf585b0ce00c0feac1282af325e61a57d08ad9cdedbfc12ec0c0bbb4448f",
+  "config": {
+    "output_tokens": 3,
+    "ttft_slo_ms": 2000,
+    "tpot_slo_ms": 100
+  },
+  "model_bytes_on_disk": 0,
+  "peak_mlx_allocated_bytes": 0,
+  "prefix_setup_seconds": 0,
+  "summary": {
+    "attempted": 12,
+    "successful": 12,
+    "failed": 0,
+    "output_tokens": 36,
+    "wall_seconds": 1.8,
+    "setup_seconds": 0,
+    "ttft_ms": {
+      "n": 12,
+      "p50": 100.0,
+      "p95": 100.0,
+      "mean": 100.0
+    },
+    "itl_ms": {
+      "n": 24,
+      "p50": 20.000000000000004,
+      "p95": 20.000000000000018,
+      "mean": 20.000000000000004
+    },
+    "tpot_ms": {
+      "n": 12,
+      "p50": 20.000000000000004,
+      "p95": 20.000000000000004,
+      "mean": 20.000000000000004
+    },
+    "e2e_ms": {
+      "n": 12,
+      "p50": 150.0,
+      "p95": 150.0,
+      "mean": 150.0
+    },
+    "output_tokens_per_second": 20.0,
+    "requests_per_second": 6.666666666666666,
+    "slo_requests_per_second": 6.666666666666666,
+    "setup_inclusive_tokens_per_second": 20.0,
+    "estimated_cost_per_1m_output_tokens": null,
+    "setup_inclusive_cost_per_1m_output_tokens": null,
+    "estimated_cost_per_1k_requests": null,
+    "hourly_cost_assumption": null
+  },
+  "requests": [
+    {
+      "output_tokens": 3,
+      "ttft_ms": 100.0,
+      "itl_ms": [
+        19.99999999999999,
+        20.000000000000018
+      ],
+      "tpot_ms": 20.000000000000004,
+      "e2e_ms": 150.0,
+      "id": "fashion-00",
+      "text": "fixture"
+    },
+    {
+      "output_tokens": 3,
+      "ttft_ms": 100.0,
+      "itl_ms": [
+        19.99999999999999,
+        20.000000000000018
+      ],
+      "tpot_ms": 20.000000000000004,
+      "e2e_ms": 150.0,
+      "id": "fashion-01",
+      "text": "fixture"
+    },
+    {
+      "output_tokens": 3,
+      "ttft_ms": 100.0,
+      "itl_ms": [
+        19.99999999999999,
+        20.000000000000018
+      ],
+      "tpot_ms": 20.000000000000004,
+      "e2e_ms": 150.0,
+      "id": "fashion-02",
+      "text": "fixture"
+    },
+    {
+      "output_tokens": 3,
+      "ttft_ms": 100.0,
+      "itl_ms": [
+        19.99999999999999,
+        20.000000000000018
+      ],
+      "tpot_ms": 20.000000000000004,
+      "e2e_ms": 150.0,
+      "id": "fashion-03",
+      "text": "fixture"
+    },
+    {
+      "output_tokens": 3,
+      "ttft_ms": 100.0,
+      "itl_ms": [
+        19.99999999999999,
+        20.000000000000018
+      ],
+      "tpot_ms": 20.000000000000004,
+      "e2e_ms": 150.0,
+      "id": "fashion-04",
+      "text": "fixture"
+    },
+    {
+      "output_tokens": 3,
+      "ttft_ms": 100.0,
+      "itl_ms": [
+        19.99999999999999,
+        20.000000000000018
+      ],
+      "tpot_ms": 20.000000000000004,
+      "e2e_ms": 150.0,
+      "id": "fashion-05",
+      "text": "fixture"
+    },
+    {
+      "output_tokens": 3,
+      "ttft_ms": 100.0,
+      "itl_ms": [
+        19.99999999999999,
+        20.000000000000018
+      ],
+      "tpot_ms": 20.000000000000004,
+      "e2e_ms": 150.0,
+      "id": "fashion-06",
+      "text": "fixture"
+    },
+    {
+      "output_tokens": 3,
+      "ttft_ms": 100.0,
+      "itl_ms": [
+        19.99999999999999,
+        20.000000000000018
+      ],
+      "tpot_ms": 20.000000000000004,
+      "e2e_ms": 150.0,
+      "id": "fashion-07",
+      "text": "fixture"
+    },
+    {
+      "output_tokens": 3,
+      "ttft_ms": 100.0,
+      "itl_ms": [
+        19.99999999999999,
+        20.000000000000018
+      ],
+      "tpot_ms": 20.000000000000004,
+      "e2e_ms": 150.0,
+      "id": "fashion-08",
+      "text": "fixture"
+    },
+    {
+      "output_tokens": 3,
+      "ttft_ms": 100.0,
+      "itl_ms": [
+        19.99999999999999,
+        20.000000000000018
+      ],
+      "tpot_ms": 20.000000000000004,
+      "e2e_ms": 150.0,
+      "id": "fashion-09",
+      "text": "fixture"
+    },
+    {
+      "output_tokens": 3,
+      "ttft_ms": 100.0,
+      "itl_ms": [
+        19.99999999999999,
+        20.000000000000018
+      ],
+      "tpot_ms": 20.000000000000004,
+      "e2e_ms": 150.0,
+      "id": "fashion-10",
+      "text": "fixture"
+    },
+    {
+      "output_tokens": 3,
+      "ttft_ms": 100.0,
+      "itl_ms": [
+        19.99999999999999,
+        20.000000000000018
+      ],
+      "tpot_ms": 20.000000000000004,
+      "e2e_ms": 150.0,
+      "id": "fashion-11",
+      "text": "fixture"
+    }
+  ],
+  "quality": [
+    {
+      "id": "fashion-00",
+      "tag": "boundary",
+      "text": "{\"action\": \"approve_return\", \"policy_id\": \"FASHION_30\"}",
+      "token_ids": [],
+      "score": {
+        "valid_json_schema": true,
+        "correct": true,
+        "parsed": {
+          "action": "approve_return",
+          "policy_id": "FASHION_30"
+        }
+      }
+    },
+    {
+      "id": "fashion-01",
+      "tag": "boundary",
+      "text": "{\"action\": \"deny_return\", \"policy_id\": \"FASHION_30\"}",
+      "token_ids": [],
+      "score": {
+        "valid_json_schema": true,
+        "correct": true,
+        "parsed": {
+          "action": "deny_return",
+          "policy_id": "FASHION_30"
+        }
+      }
+    },
+    {
+      "id": "fashion-02",
+      "tag": "boundary",
+      "text": "{\"action\": \"approve_return\", \"policy_id\": \"FASHION_30\"}",
+      "token_ids": [],
+      "score": {
+        "valid_json_schema": true,
+        "correct": true,
+        "parsed": {
+          "action": "approve_return",
+          "policy_id": "FASHION_30"
+        }
+      }
+    },
+    {
+      "id": "fashion-03",
+      "tag": "boundary",
+      "text": "{\"action\": \"deny_return\", \"policy_id\": \"FASHION_30\"}",
+      "token_ids": [],
+      "score": {
+        "valid_json_schema": true,
+        "correct": true,
+        "parsed": {
+          "action": "deny_return",
+          "policy_id": "FASHION_30"
+        }
+      }
+    },
+    {
+      "id": "fashion-04",
+      "tag": "boundary",
+      "text": "{\"action\": \"deny_return\", \"policy_id\": \"FASHION_30\"}",
+      "token_ids": [],
+      "score": {
+        "valid_json_schema": true,
+        "correct": true,
+        "parsed": {
+          "action": "deny_return",
+          "policy_id": "FASHION_30"
+        }
+      }
+    },
+    {
+      "id": "fashion-05",
+      "tag": "boundary",
+      "text": "{\"action\": \"deny_return\", \"policy_id\": \"FASHION_30\"}",
+      "token_ids": [],
+      "score": {
+        "valid_json_schema": true,
+        "correct": true,
+        "parsed": {
+          "action": "deny_return",
+          "policy_id": "FASHION_30"
+        }
+      }
+    },
+    {
+      "id": "fashion-06",
+      "tag": "invalid",
+      "text": "{\"action\": \"escalate\", \"policy_id\": \"MANUAL\"}",
+      "token_ids": [],
+      "score": {
+        "valid_json_schema": true,
+        "correct": true,
+        "parsed": {
+          "action": "escalate",
+          "policy_id": "MANUAL"
+        }
+      }
+    },
+    {
+      "id": "fashion-07",
+      "tag": "missing",
+      "text": "{\"action\": \"escalate\", \"policy_id\": \"MANUAL\"}",
+      "token_ids": [],
+      "score": {
+        "valid_json_schema": true,
+        "correct": true,
+        "parsed": {
+          "action": "escalate",
+          "policy_id": "MANUAL"
+        }
+      }
+    },
+    {
+      "id": "fashion-08",
+      "tag": "missing",
+      "text": "{\"action\": \"escalate\", \"policy_id\": \"MANUAL\"}",
+      "token_ids": [],
+      "score": {
+        "valid_json_schema": true,
+        "correct": true,
+        "parsed": {
+          "action": "escalate",
+          "policy_id": "MANUAL"
+        }
+      }
+    },
+    {
+      "id": "fashion-09",
+      "tag": "invalid",
+      "text": "{\"action\": \"escalate\", \"policy_id\": \"MANUAL\"}",
+      "token_ids": [],
+      "score": {
+        "valid_json_schema": true,
+        "correct": true,
+        "parsed": {
+          "action": "escalate",
+          "policy_id": "MANUAL"
+        }
+      }
+    },
+    {
+      "id": "fashion-10",
+      "tag": "injection",
+      "text": "{\"action\": \"deny_return\", \"policy_id\": \"FASHION_30\"}",
+      "token_ids": [],
+      "score": {
+        "valid_json_schema": true,
+        "correct": true,
+        "parsed": {
+          "action": "deny_return",
+          "policy_id": "FASHION_30"
+        }
+      }
+    },
+    {
+      "id": "fashion-11",
+      "tag": "injection",
+      "text": "{\"action\": \"approve_return\", \"policy_id\": \"FASHION_30\"}",
+      "token_ids": [],
+      "score": {
+        "valid_json_schema": true,
+        "correct": true,
+        "parsed": {
+          "action": "approve_return",
+          "policy_id": "FASHION_30"
+        }
+      }
+    },
+    {
+      "id": "electronics-00",
+      "tag": "boundary",
+      "text": "{\"action\": \"approve_return\", \"policy_id\": \"ELECTRONICS_7\"}",
+      "token_ids": [],
+      "score": {
+        "valid_json_schema": true,
+        "correct": true,
+        "parsed": {
+          "action": "approve_return",
+          "policy_id": "ELECTRONICS_7"
+        }
+      }
+    },
+    {
+      "id": "electronics-01",
+      "tag": "boundary",
+      "text": "{\"action\": \"deny_return\", \"policy_id\": \"ELECTRONICS_7\"}",
+      "token_ids": [],
+      "score": {
+        "valid_json_schema": true,
+        "correct": true,
+        "parsed": {
+          "action": "deny_return",
+          "policy_id": "ELECTRONICS_7"
+        }
+      }
+    },
+    {
+      "id": "electronics-02",
+      "tag": "boundary",
+      "text": "{\"action\": \"approve_return\", \"policy_id\": \"ELECTRONICS_7\"}",
+      "token_ids": [],
+      "score": {
+        "valid_json_schema": true,
+        "correct": true,
+        "parsed": {
+          "action": "approve_return",
+          "policy_id": "ELECTRONICS_7"
+        }
+      }
+    },
+    {
+      "id": "electronics-03",
+      "tag": "boundary",
+      "text": "{\"action\": \"deny_return\", \"policy_id\": \"ELECTRONICS_7\"}",
+      "token_ids": [],
+      "score": {
+        "valid_json_schema": true,
+        "correct": true,
+        "parsed": {
+          "action": "deny_return",
+          "policy_id": "ELECTRONICS_7"
+        }
+      }
+    },
+    {
+      "id": "electronics-04",
+      "tag": "boundary",
+      "text": "{\"action\": \"deny_return\", \"policy_id\": \"ELECTRONICS_7\"}",
+      "token_ids": [],
+      "score": {
+        "valid_json_schema": true,
+        "correct": true,
+        "parsed": {
+          "action": "deny_return",
+          "policy_id": "ELECTRONICS_7"
+        }
+      }
+    },
+    {
+      "id": "electronics-05",
+      "tag": "boundary",
+      "text": "{\"action\": \"deny_return\", \"policy_id\": \"ELECTRONICS_7\"}",
+      "token_ids": [],
+      "score": {
+        "valid_json_schema": true,
+        "correct": true,
+        "parsed": {
+          "action": "deny_return",
+          "policy_id": "ELECTRONICS_7"
+        }
+      }
+    },
+    {
+      "id": "electronics-06",
+      "tag": "invalid",
+      "text": "{\"action\": \"escalate\", \"policy_id\": \"MANUAL\"}",
+      "token_ids": [],
+      "score": {
+        "valid_json_schema": true,
+        "correct": true,
+        "parsed": {
+          "action": "escalate",
+          "policy_id": "MANUAL"
+        }
+      }
+    },
+    {
+      "id": "electronics-07",
+      "tag": "missing",
+      "text": "{\"action\": \"escalate\", \"policy_id\": \"MANUAL\"}",
+      "token_ids": [],
+      "score": {
+        "valid_json_schema": true,
+        "correct": true,
+        "parsed": {
+          "action": "escalate",
+          "policy_id": "MANUAL"
+        }
+      }
+    },
+    {
+      "id": "electronics-08",
+      "tag": "missing",
+      "text": "{\"action\": \"escalate\", \"policy_id\": \"MANUAL\"}",
+      "token_ids": [],
+      "score": {
+        "valid_json_schema": true,
+        "correct": true,
+        "parsed": {
+          "action": "escalate",
+          "policy_id": "MANUAL"
+        }
+      }
+    },
+    {
+      "id": "electronics-09",
+      "tag": "invalid",
+      "text": "{\"action\": \"escalate\", \"policy_id\": \"MANUAL\"}",
+      "token_ids": [],
+      "score": {
+        "valid_json_schema": true,
+        "correct": true,
+        "parsed": {
+          "action": "escalate",
+          "policy_id": "MANUAL"
+        }
+      }
+    },
+    {
+      "id": "electronics-10",
+      "tag": "injection",
+      "text": "{\"action\": \"deny_return\", \"policy_id\": \"ELECTRONICS_7\"}",
+      "token_ids": [],
+      "score": {
+        "valid_json_schema": true,
+        "correct": true,
+        "parsed": {
+          "action": "deny_return",
+          "policy_id": "ELECTRONICS_7"
+        }
+      }
+    },
+    {
+      "id": "electronics-11",
+      "tag": "injection",
+      "text": "{\"action\": \"approve_return\", \"policy_id\": \"ELECTRONICS_7\"}",
+      "token_ids": [],
+      "score": {
+        "valid_json_schema": true,
+        "correct": true,
+        "parsed": {
+          "action": "approve_return",
+          "policy_id": "ELECTRONICS_7"
+        }
+      }
+    },
+    {
+      "id": "beauty-00",
+      "tag": "boundary",
+      "text": "{\"action\": \"approve_return\", \"policy_id\": \"BEAUTY_14\"}",
+      "token_ids": [],
+      "score": {
+        "valid_json_schema": true,
+        "correct": true,
+        "parsed": {
+          "action": "approve_return",
+          "policy_id": "BEAUTY_14"
+        }
+      }
+    },
+    {
+      "id": "beauty-01",
+      "tag": "boundary",
+      "text": "{\"action\": \"deny_return\", \"policy_id\": \"BEAUTY_14\"}",
+      "token_ids": [],
+      "score": {
+        "valid_json_schema": true,
+        "correct": true,
+        "parsed": {
+          "action": "deny_return",
+          "policy_id": "BEAUTY_14"
+        }
+      }
+    },
+    {
+      "id": "beauty-02",
+      "tag": "boundary",
+      "text": "{\"action\": \"approve_return\", \"policy_id\": \"BEAUTY_14\"}",
+      "token_ids": [],
+      "score": {
+        "valid_json_schema": true,
+        "correct": true,
+        "parsed": {
+          "action": "approve_return",
+          "policy_id": "BEAUTY_14"
+        }
+      }
+    },
+    {
+      "id": "beauty-03",
+      "tag": "boundary",
+      "text": "{\"action\": \"deny_return\", \"policy_id\": \"BEAUTY_14\"}",
+      "token_ids": [],
+      "score": {
+        "valid_json_schema": true,
+        "correct": true,
+        "parsed": {
+          "action": "deny_return",
+          "policy_id": "BEAUTY_14"
+        }
+      }
+    },
+    {
+      "id": "beauty-04",
+      "tag": "boundary",
+      "text": "{\"action\": \"deny_return\", \"policy_id\": \"BEAUTY_14\"}",
+      "token_ids": [],
+      "score": {
+        "valid_json_schema": true,
+        "correct": true,
+        "parsed": {
+          "action": "deny_return",
+          "policy_id": "BEAUTY_14"
+        }
+      }
+    },
+    {
+      "id": "beauty-05",
+      "tag": "boundary",
+      "text": "{\"action\": \"deny_return\", \"policy_id\": \"BEAUTY_14\"}",
+      "token_ids": [],
+      "score": {
+        "valid_json_schema": true,
+        "correct": true,
+        "parsed": {
+          "action": "deny_return",
+          "policy_id": "BEAUTY_14"
+        }
+      }
+    },
+    {
+      "id": "beauty-06",
+      "tag": "invalid",
+      "text": "{\"action\": \"escalate\", \"policy_id\": \"MANUAL\"}",
+      "token_ids": [],
+      "score": {
+        "valid_json_schema": true,
+        "correct": true,
+        "parsed": {
+          "action": "escalate",
+          "policy_id": "MANUAL"
+        }
+      }
+    },
+    {
+      "id": "beauty-07",
+      "tag": "missing",
+      "text": "{\"action\": \"escalate\", \"policy_id\": \"MANUAL\"}",
+      "token_ids": [],
+      "score": {
+        "valid_json_schema": true,
+        "correct": true,
+        "parsed": {
+          "action": "escalate",
+          "policy_id": "MANUAL"
+        }
+      }
+    },
+    {
+      "id": "beauty-08",
+      "tag": "missing",
+      "text": "{\"action\": \"escalate\", \"policy_id\": \"MANUAL\"}",
+      "token_ids": [],
+      "score": {
+        "valid_json_schema": true,
+        "correct": true,
+        "parsed": {
+          "action": "escalate",
+          "policy_id": "MANUAL"
+        }
+      }
+    },
+    {
+      "id": "beauty-09",
+      "tag": "invalid",
+      "text": "{\"action\": \"escalate\", \"policy_id\": \"MANUAL\"}",
+      "token_ids": [],
+      "score": {
+        "valid_json_schema": true,
+        "correct": true,
+        "parsed": {
+          "action": "escalate",
+          "policy_id": "MANUAL"
+        }
+      }
+    },
+    {
+      "id": "beauty-10",
+      "tag": "injection",
+      "text": "{\"action\": \"deny_return\", \"policy_id\": \"BEAUTY_14\"}",
+      "token_ids": [],
+      "score": {
+        "valid_json_schema": true,
+        "correct": true,
+        "parsed": {
+          "action": "deny_return",
+          "policy_id": "BEAUTY_14"
+        }
+      }
+    },
+    {
+      "id": "beauty-11",
+      "tag": "injection",
+      "text": "{\"action\": \"approve_return\", \"policy_id\": \"BEAUTY_14\"}",
+      "token_ids": [],
+      "score": {
+        "valid_json_schema": true,
+        "correct": true,
+        "parsed": {
+          "action": "approve_return",
+          "policy_id": "BEAUTY_14"
+        }
+      }
+    },
+    {
+      "id": "grocery-00",
+      "tag": "boundary",
+      "text": "{\"action\": \"approve_return\", \"policy_id\": \"GROCERY_2\"}",
+      "token_ids": [],
+      "score": {
+        "valid_json_schema": true,
+        "correct": true,
+        "parsed": {
+          "action": "approve_return",
+          "policy_id": "GROCERY_2"
+        }
+      }
+    },
+    {
+      "id": "grocery-01",
+      "tag": "boundary",
+      "text": "{\"action\": \"deny_return\", \"policy_id\": \"GROCERY_2\"}",
+      "token_ids": [],
+      "score": {
+        "valid_json_schema": true,
+        "correct": true,
+        "parsed": {
+          "action": "deny_return",
+          "policy_id": "GROCERY_2"
+        }
+      }
+    },
+    {
+      "id": "grocery-02",
+      "tag": "boundary",
+      "text": "{\"action\": \"approve_return\", \"policy_id\": \"GROCERY_2\"}",
+      "token_ids": [],
+      "score": {
+        "valid_json_schema": true,
+        "correct": true,
+        "parsed": {
+          "action": "approve_return",
+          "policy_id": "GROCERY_2"
+        }
+      }
+    },
+    {
+      "id": "grocery-03",
+      "tag": "boundary",
+      "text": "{\"action\": \"deny_return\", \"policy_id\": \"GROCERY_2\"}",
+      "token_ids": [],
+      "score": {
+        "valid_json_schema": true,
+        "correct": true,
+        "parsed": {
+          "action": "deny_return",
+          "policy_id": "GROCERY_2"
+        }
+      }
+    },
+    {
+      "id": "grocery-04",
+      "tag": "boundary",
+      "text": "{\"action\": \"deny_return\", \"policy_id\": \"GROCERY_2\"}",
+      "token_ids": [],
+      "score": {
+        "valid_json_schema": true,
+        "correct": true,
+        "parsed": {
+          "action": "deny_return",
+          "policy_id": "GROCERY_2"
+        }
+      }
+    },
+    {
+      "id": "grocery-05",
+      "tag": "boundary",
+      "text": "{\"action\": \"deny_return\", \"policy_id\": \"GROCERY_2\"}",
+      "token_ids": [],
+      "score": {
+        "valid_json_schema": true,
+        "correct": true,
+        "parsed": {
+          "action": "deny_return",
+          "policy_id": "GROCERY_2"
+        }
+      }
+    },
+    {
+      "id": "grocery-06",
+      "tag": "invalid",
+      "text": "{\"action\": \"escalate\", \"policy_id\": \"MANUAL\"}",
+      "token_ids": [],
+      "score": {
+        "valid_json_schema": true,
+        "correct": true,
+        "parsed": {
+          "action": "escalate",
+          "policy_id": "MANUAL"
+        }
+      }
+    },
+    {
+      "id": "grocery-07",
+      "tag": "missing",
+      "text": "{\"action\": \"escalate\", \"policy_id\": \"MANUAL\"}",
+      "token_ids": [],
+      "score": {
+        "valid_json_schema": true,
+        "correct": true,
+        "parsed": {
+          "action": "escalate",
+          "policy_id": "MANUAL"
+        }
+      }
+    },
+    {
+      "id": "grocery-08",
+      "tag": "missing",
+      "text": "{\"action\": \"escalate\", \"policy_id\": \"MANUAL\"}",
+      "token_ids": [],
+      "score": {
+        "valid_json_schema": true,
+        "correct": true,
+        "parsed": {
+          "action": "escalate",
+          "policy_id": "MANUAL"
+        }
+      }
+    },
+    {
+      "id": "grocery-09",
+      "tag": "invalid",
+      "text": "{\"action\": \"escalate\", \"policy_id\": \"MANUAL\"}",
+      "token_ids": [],
+      "score": {
+        "valid_json_schema": true,
+        "correct": true,
+        "parsed": {
+          "action": "escalate",
+          "policy_id": "MANUAL"
+        }
+      }
+    },
+    {
+      "id": "grocery-10",
+      "tag": "injection",
+      "text": "{\"action\": \"deny_return\", \"policy_id\": \"GROCERY_2\"}",
+      "token_ids": [],
+      "score": {
+        "valid_json_schema": true,
+        "correct": true,
+        "parsed": {
+          "action": "deny_return",
+          "policy_id": "GROCERY_2"
+        }
+      }
+    },
+    {
+      "id": "grocery-11",
+      "tag": "injection",
+      "text": "{\"action\": \"approve_return\", \"policy_id\": \"GROCERY_2\"}",
+      "token_ids": [],
+      "score": {
+        "valid_json_schema": true,
+        "correct": true,
+        "parsed": {
+          "action": "approve_return",
+          "policy_id": "GROCERY_2"
+        }
+      }
+    },
+    {
+      "id": "unknown-00",
+      "tag": "invalid",
+      "text": "{\"action\": \"escalate\", \"policy_id\": \"MANUAL\"}",
+      "token_ids": [],
+      "score": {
+        "valid_json_schema": true,
+        "correct": true,
+        "parsed": {
+          "action": "escalate",
+          "policy_id": "MANUAL"
+        }
+      }
+    },
+    {
+      "id": "unknown-01",
+      "tag": "invalid",
+      "text": "{\"action\": \"escalate\", \"policy_id\": \"MANUAL\"}",
+      "token_ids": [],
+      "score": {
+        "valid_json_schema": true,
+        "correct": true,
+        "parsed": {
+          "action": "escalate",
+          "policy_id": "MANUAL"
+        }
+      }
+    },
+    {
+      "id": "unknown-02",
+      "tag": "invalid",
+      "text": "{\"action\": \"escalate\", \"policy_id\": \"MANUAL\"}",
+      "token_ids": [],
+      "score": {
+        "valid_json_schema": true,
+        "correct": true,
+        "parsed": {
+          "action": "escalate",
+          "policy_id": "MANUAL"
+        }
+      }
+    },
+    {
+      "id": "unknown-03",
+      "tag": "invalid",
+      "text": "{\"action\": \"escalate\", \"policy_id\": \"MANUAL\"}",
+      "token_ids": [],
+      "score": {
+        "valid_json_schema": true,
+        "correct": true,
+        "parsed": {
+          "action": "escalate",
+          "policy_id": "MANUAL"
+        }
+      }
+    }
+  ],
+  "quality_summary": {
+    "n": 52,
+    "accuracy": 1.0,
+    "schema_valid_rate": 1.0,
+    "by_tag": {
+      "boundary": {
+        "n": 24,
+        "accuracy": 1.0
+      },
+      "injection": {
+        "n": 8,
+        "accuracy": 1.0
+      },
+      "invalid": {
+        "n": 12,
+        "accuracy": 1.0
+      },
+      "missing": {
+        "n": 8,
+        "accuracy": 1.0
+      }
+    }
+  }
+}

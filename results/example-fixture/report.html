@@ -1,0 +1,90 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width">
+<title>Inference Impact Lab</title><style>body{font:16px system-ui;max-width:1100px;margin:50px auto;padding:24px;background:#101823;color:#e5edf5}h1{color:#71e0c0}table{border-collapse:collapse;width:100%}td,th{padding:14px;text-align:left;border-bottom:1px solid #405060}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#1c2938;padding:24px}summary{cursor:pointer;margin:24px 0}p{line-height:1.7}</style>
+<h1>Inference Impact Lab</h1><p><strong>SIMULATED TEST FIXTURE — NOT MODEL PERFORMANCE</strong></p><p>Two controlled experiments: 4-bit weight quantization and exact-prefix KV reuse.</p>
+<table><tr><th>Variant</th><th>TTFT p50 (ms)</th><th>ITL p50 (ms)</th><th>Output tokens/s</th><th>Quality gate</th></tr><tr><td>fp16-prefix</td><td>100.000</td><td>20.000</td><td>20.000</td><td>PASS</td></tr><tr><td>fp16</td><td>100.000</td><td>20.000</td><td>20.000</td><td>PASS</td></tr><tr><td>int4-prefix</td><td>100.000</td><td>20.000</td><td>20.000</td><td>PASS</td></tr><tr><td>int4</td><td>100.000</td><td>20.000</td><td>20.000</td><td>PASS</td></tr></table>
+<details><summary>Full methodology and evidence</summary><pre># SIMULATED TEST FIXTURE — NOT MODEL PERFORMANCE
+
+Model: `NO_MODEL_EXECUTED` at `fixture`.
+
+Hardware: [&quot;NONE \u2014 simulated fixture&quot;].
+
+| Variant | TTFT p50 / p95 ms | ITL p50 / p95 ms | Output tok/s | Peak MLX GB | Accuracy | Gate | Est. $/1M output tokens |
+|---|---:|---:|---:|---:|---:|---|---:|
+| fp16 | 100.000 / 100.000 | 20.000 / 20.000 | 20.000 | 0.000 | 100.0% | PASS | not measured |
+| fp16-prefix | 100.000 / 100.000 | 20.000 / 20.000 | 20.000 | 0.000 | 100.0% | PASS | not measured |
+| int4 | 100.000 / 100.000 | 20.000 / 20.000 | 20.000 | 0.000 | 100.0% | PASS | not measured |
+| int4-prefix | 100.000 / 100.000 | 20.000 / 20.000 | 20.000 | 0.000 | 100.0% | PASS | not measured |
+
+## Interpretation
+
+Compare fp16→int4 for quantization; fp16→fp16-prefix for caching; fp16→int4-prefix for the combination.
+No faster variant is recommended automatically. A failed quality gate disqualifies it.
+TTFT and ITL are in-process token availability, excluding tokenization, model load and network time.
+Throughput uses total measured request wall time; it is serial throughput at concurrency 1, not server capacity.
+Prefix rows measure warm hits. comparison.json also includes throughput/cost including one prefix fill per round.
+ITL percentiles pool token gaps. TPOT is per-request mean inter-token gap and is reported separately in JSON.
+Peak memory is MLX allocator memory, not total system RAM or dedicated VRAM. Disk size is not GPU memory.
+Cost is an explicit hourly allocation model, not a bill. No hourly price supplied means no cost estimate.
+The performance suite forces a fixed output budget. The 52-case quality suite uses natural EOS stopping.
+Confidence intervals resample case means, not individual tokens. Small synthetic samples do not establish production impact.
+
+## Paired TTFT changes
+
+- fp16-prefix: after − before = 0.000 ms; case-bootstrap 95% CI [0.000, 0.000] ms.
+- int4: after − before = 0.000 ms; case-bootstrap 95% CI [0.000, 0.000] ms.
+- int4-prefix: after − before = 0.000 ms; case-bootstrap 95% CI [0.000, 0.000] ms.
+
+## Quality regressions
+
+```json
+{
+  &quot;fp16&quot;: {
+    &quot;passed&quot;: true,
+    &quot;baseline_accuracy&quot;: 1.0,
+    &quot;candidate_accuracy&quot;: 1.0,
+    &quot;accuracy_delta&quot;: 0.0,
+    &quot;min_accuracy&quot;: 0.95,
+    &quot;max_absolute_drop&quot;: 0.02,
+    &quot;critical_cases_all_pass&quot;: true,
+    &quot;regressions&quot;: [],
+    &quot;caveat&quot;: &quot;Small synthetic regression suite; not production quality certification.&quot;
+  },
+  &quot;fp16-prefix&quot;: {
+    &quot;passed&quot;: true,
+    &quot;baseline_accuracy&quot;: 1.0,
+    &quot;candidate_accuracy&quot;: 1.0,
+    &quot;accuracy_delta&quot;: 0.0,
+    &quot;min_accuracy&quot;: 0.95,
+    &quot;max_absolute_drop&quot;: 0.02,
+    &quot;critical_cases_all_pass&quot;: true,
+    &quot;regressions&quot;: [],
+    &quot;caveat&quot;: &quot;Small synthetic regression suite; not production quality certification.&quot;
+  },
+  &quot;int4&quot;: {
+    &quot;passed&quot;: true,
+    &quot;baseline_accuracy&quot;: 1.0,
+    &quot;candidate_accuracy&quot;: 1.0,
+    &quot;accuracy_delta&quot;: 0.0,
+    &quot;min_accuracy&quot;: 0.95,
+    &quot;max_absolute_drop&quot;: 0.02,
+    &quot;critical_cases_all_pass&quot;: true,
+    &quot;regressions&quot;: [],
+    &quot;caveat&quot;: &quot;Small synthetic regression suite; not production quality certification.&quot;
+  },
+  &quot;int4-prefix&quot;: {
+    &quot;passed&quot;: true,
+    &quot;baseline_accuracy&quot;: 1.0,
+    &quot;candidate_accuracy&quot;: 1.0,
+    &quot;accuracy_delta&quot;: 0.0,
+    &quot;min_accuracy&quot;: 0.95,
+    &quot;max_absolute_drop&quot;: 0.02,
+    &quot;critical_cases_all_pass&quot;: true,
+    &quot;regressions&quot;: [],
+    &quot;caveat&quot;: &quot;Small synthetic regression suite; not production quality certification.&quot;
+  }
+}
+```
+
+## Production status
+
+No production deployment or customer traffic is claimed.</pre></details></html>
